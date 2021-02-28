@@ -11,7 +11,7 @@ Flask webhook requires Python 3.x.
 
 .. code:: sh
 
-    git clone {{repo }}
+    git clone https://github.com/dkoval-py/flask_webhook.git
     pip install -r requirements.txt
 
 Run
