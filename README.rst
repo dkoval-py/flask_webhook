@@ -38,10 +38,10 @@ Run docker container
 .. code:: sh
 
     docker build --network host -t webhook:v1.1 .
-    docker run -d -p 5000:5000 webhook:v1.1
+    docker run -d -p 5000:5000 --restart unless-stopped webhook:v1.1
 
 * Run from Docker image from DockerHub (in this case you don't need to make Instalation block):
 .. code:: sh
 
-   docker run -d -p 5000:5000 dkovaldocker/flask-webhook:v1.1
+   docker run -d -p 5000:5000 --restart unless-stopped dkovaldocker/flask-webhook:v1.1
 
