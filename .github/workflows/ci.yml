@@ -26,8 +26,9 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; \
         else pip install Flask gunicorn; fi
-    - name: Lint with flake8
-      run: |
-        ls -la 
-        pip freeze
+    - name: Check application running
+      run: python application/webhook.py
+
+    - name: Test application
+      run: curl localhost:5000
 
