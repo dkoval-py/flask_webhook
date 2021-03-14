@@ -1,11 +1,18 @@
 from flask import Flask, request
 from dotenv import load_dotenv
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from prometheus_client import make_wsgi_app
 import os, json
 
 
 app = Flask(__name__)
 load_dotenv() # Initialize variables from .env file
 
+
+# Add prometheus wsgi middleware to route /metrics requests
+app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {
+    '/metrics': make_wsgi_app()
+})
 
 @app.route('/', methods=['POST'])
 def web_hook():
