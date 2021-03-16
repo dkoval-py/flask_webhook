@@ -1,21 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-webhook-deployment
+  name: flask-webhook-deployment-{{ .Release.Name }}
   labels:
-    env: prod
-    app: flask-webhook
+    env: {{ .Values.env }}
+    app: flask-webhook-{{ .Release.Name }}
 spec:
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: flask-webhook
+      app: flask-webhook-{{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: flask-webhook
+        app: flask-webhook-{{ .Release.Name }}
     spec:
       containers:
         - name: flask-webhook
-          image: dkovaldocker/flask-webhook
+          image: {{ .Values.conainer.image  }}
           ports:
-            - containerPort: 5000
+            {{- if .Velues.env "production" }}
+            - containerPort: {{ .Values.container.podPort }}
+            {{- else }}
+            - containerPort: {{ .Values.container,stagePort }}
+            {{- end }} 
