@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: flask-webhook-deployment
   labels:
+    env: prod
     app: flask-webhook
 spec:
   selector:
