@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-webhook-deployment
+  labels:
+    app: flask-webhook
+spec:
+  selector:
+    matchLabels:
+      app: flask-webhook
+  template:
+    metadata:
+      labels:
+        app: flask-webhook
+    spec:
+      containers:
+        - name: flask-webhook
+          image: dkovaldocker/flask-webhook
+          ports:
+            - containerPort: 5000
