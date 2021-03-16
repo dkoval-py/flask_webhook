@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-webhook-deployment-{{ .Release.Name }}
+  labels:
+    env: {{ .Values.container.env }}
+    app: flask-webhook-{{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: flask-webhook-{{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: flask-webhook-{{ .Release.Name }}
+    spec:
+      containers:
+        - name: flask-webhook
+          image: {{ .Values.container.image }}
+          ports:
+          {{- if eq .Values.container.env "stage" }}
+            - containerPort: {{ .Values.container.stagePort }}
+          {{- else }}
+            - containerPort: {{ .Values.container.prodPort }}
+          {{- end }}

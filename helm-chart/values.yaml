@@ -1,0 +1,9 @@
+# Default values for FlaskWebhook-HelmChart
+
+container:
+  env: stage
+  image: dkovaldocker/flask-webhook
+  prodPort: 5000
+  stagePort: 11111
+
+repicaCount: 1
