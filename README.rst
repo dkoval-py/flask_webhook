@@ -55,18 +55,18 @@ Run K8S service
    kubectl apply -f k8s/deployment.yml
    kubectl apply -f k8s/service.yml
 
-* Install app and run it using helm:
-1) Production:
+| Install app and run it using helm:
+* Production:
 .. code:: sh
 
    helm install APP-NAME helm-chart
 
-2) Stage:
+* Stage:
 .. code:: sh
 
    helm install APP-NAME helm-chart/ -f helm-chart/another-values/values-stage.yaml
 
-3) Test:
+* Test:
 .. code:: sh
 
    helm install APP-NAME helm-chart/ -f helm-chart/another-values/values-test.yaml
