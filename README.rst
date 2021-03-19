@@ -32,16 +32,42 @@ Run from source
 
 Run docker container
 ~~~~~~~~~~~~~~~~~~~~
-| If you would like to run application as docker container, you can two choise:
+| If you would like to run application as a docker container, you can two choise:
 
 * Run from source code:
 .. code:: sh
 
     docker build --network host -t webhook:v1.1 .
-    docker run -d -p 5000:5000 --restart unless-stopped webhook:v1.1
+    docker run -d -p 5000:5000 --restart unless-stopped webhook
 
 * Run from Docker image from DockerHub (in this case you don't need to make Instalation block):
 .. code:: sh
 
-   docker run -d -p 5000:5000 --restart unless-stopped dkovaldocker/flask-webhook:v1.1
+   docker run -d -p 5000:5000 --restart unless-stopped dkovaldocker/flask-webhook
+
+Run K8S service
+~~~~~~~~~~~~~~~
+| If you would like to run application as a K8S service, you can two choise:
+
+* Run K8S service manually:
+.. code:: sh
+   
+   kubectl apply -f k8s/deployment.yml
+   kubectl apply -f k8s/service.yml
+
+* Install app and run it using helm:
+1) Production:
+.. code:: sh
+
+   helm install APP-NAME helm-chart
+
+2) Stage:
+.. code:: sh
+
+   helm install APP-NAME helm-chart/ -f helm-chart/another-values/values-stage.yaml
+
+3) Test:
+.. code:: sh
+
+   helm install APP-NAME helm-chart/ -f helm-chart/another-values/values-test.yaml
 
