@@ -10,9 +10,11 @@ spec:
     app: flask-webhook-{{ .Release.Name }}
   ports:
     - protocol: TCP
-      {{- if eq .Values.container.env "stage" }}
+      {{- if eq .Values.container.env "production" }}
+      port: {{ .Values.container.prodPort }}
+      {{- else if eq .Values.container.env "stage" }}
       port: {{ .Values.container.stagePort }}
       {{- else }}
-      port: {{ .Values.container.prodPort }}                                      
+      port: {{ .Values.container.testPort }}                                      
       {{- end }}
       targetPort: 5000

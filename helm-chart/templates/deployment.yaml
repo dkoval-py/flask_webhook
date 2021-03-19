@@ -19,8 +19,10 @@ spec:
         - name: flask-webhook
           image: {{ .Values.container.image }}
           ports:
-          {{- if eq .Values.container.env "stage" }}
+          {{- if eq .Values.container.env "production" }}
+            - containerPort: {{ .Values.container.prodPort }}
+          {{- else if eq .Values.container.env "stage" }}
             - containerPort: {{ .Values.container.stagePort }}
           {{- else }}
-            - containerPort: {{ .Values.container.prodPort }}
+            - containerPort: {{ .Values.container.testPort }}
           {{- end }}
